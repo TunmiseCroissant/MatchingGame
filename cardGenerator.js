@@ -1,6 +1,7 @@
 let maxShapes = 5;
 let shapeMaxSize = 40;
 const shapes = ["square", "rectangle", "circle", "oval", "triangle", "trapezoid", "parallelogram"]
+const colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
 
 const GenerateCard = (card) => {
     let width = parseInt(window.getComputedStyle(card).width) ;
@@ -57,6 +58,12 @@ const placeShape = (card, pos, shapeShape) => {
     shape.style.left = `${pos.x}px`
     shape.style.top = `${pos.y}px`
     shape.classList.add("shape")
+    let color = colors[Math.floor(Math.random() * colors.length)]
+    shape.style.backgroundColor = color;
+    shape.style.borderLeftColor = color;
+    shape.style.borderRightColor = color;
+    shape.style.borderTopColor = color;
+    shape.style.borderBottomColor = color;
     card.appendChild(shape);
 }
 
@@ -74,6 +81,9 @@ makeCard();
 
 makeCard();
 
+makeCard();
+
+makeCard();
 makeCard();
 
 makeCard();
