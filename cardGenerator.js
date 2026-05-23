@@ -93,6 +93,15 @@ const placeShape = (card, pos, shapeShape) => {
             } else {
                 active.classList.add("wrong")
                 shape.classList.add("wrong")
+                document.body.style.pointerEvents = "none";
+                setTimeout(() => {
+                    document.body.style.pointerEvents = 'auto';
+                    active.classList.remove("wrong")
+                    shape.classList.remove("wrong")
+                    active.classList.remove("active")
+                    shape.classList.remove("active")
+                }, 1000);
+
             }
         }
     }
