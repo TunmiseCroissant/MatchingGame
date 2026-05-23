@@ -1,0 +1,62 @@
+:root {
+  --max: 40px;
+  --color: #ff0000;
+  --half: calc(var(--max) / 2);
+  --quarter: calc(var(--max) / 4);
+}
+
+
+.square {
+    width: var(--max);
+    height: var(--max);
+    background-color: red;
+}
+
+.rectangle {
+    width: var(--max);
+    height: var(--half);
+    background-color: red;
+}
+
+.circle {
+    width: var(--max);
+    height: var(--max);
+    background-color: red;
+    border-radius: 50%;
+}
+
+.oval {
+    width: var(--max);
+    height: var(--half);
+    background-color: var(--color);
+    border-radius: 50%;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: var(--half) solid transparent;
+    border-right: var(--half) solid transparent;
+    border-bottom: var(--max) solid var(--color);
+}
+
+.trapezoid {
+    border-bottom: var(--max) solid var(--color);
+    border-left: var(--quarter) solid transparent;
+    border-right: var(--quarter) solid transparent;
+    height: 0;
+    width: var(--max);
+}
+
+.parallelogram {
+    width: (--max);
+    height: var(--half);
+    transform: skew(20deg);
+    background-color: var(--color);
+}
+
+.shape:hover {
+     filter: drop-shadow(0px -6px 5px #ffffff) 
+            drop-shadow(6px 6px 5px #ffffff) 
+            drop-shadow(-6px 6px 5px #ffffff); 
+}

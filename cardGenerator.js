@@ -1,0 +1,79 @@
+let maxShapes = 5;
+let shapeMaxSize = 40;
+const shapes = ["square", "rectangle", "circle", "oval", "triangle", "trapezoid", "parallelogram"]
+
+const GenerateCard = (card) => {
+    let width = parseInt(window.getComputedStyle(card).width) ;
+    let height = parseInt(window.getComputedStyle(card).height) ;
+    const placedShapes = [];
+    const usedShapes = [];
+    const pad = 35;
+
+    for (let i = 0; i < maxShapes; i++) {
+        let newShape;
+        let touching = true;
+        let tries = 0;
+
+        while (touching && tries < 500) {
+            newShape = {
+                x: Math.random() * (width - shapeMaxSize),
+                y: Math.random() * (height - shapeMaxSize),
+                w: shapeMaxSize,
+                h: shapeMaxSize
+            };
+
+            touching = placedShapes.some(OldShape => {
+                return !(
+                    newShape.x + newShape.w + pad < OldShape.x ||
+                    newShape.x > OldShape.x + OldShape.w + pad ||
+                    newShape.y + newShape.h + pad < OldShape.y ||
+                    newShape.y > OldShape.y + OldShape.h + pad
+                )
+            })
+
+            tries++;
+        }
+
+        if (tries < 500) {
+            placedShapes.push(newShape)
+            let chosenShape = "square";
+            while (usedShapes.includes(chosenShape)) {
+                chosenShape = shapes[Math.floor(Math.random() * shapes.length)]
+            }
+            usedShapes.push(chosenShape);
+            placeShape(card, newShape, chosenShape)
+        }
+
+    }
+
+    card.style.visibility = "visible";
+    console.log(card)
+}
+
+const placeShape = (card, pos, shapeShape) => {
+    const shape = document.createElement('div')
+    shape.classList.add(shapeShape);
+    shape.style.position = "absolute";
+    shape.style.left = `${pos.x}px`
+    shape.style.top = `${pos.y}px`
+    shape.classList.add("shape")
+    card.appendChild(shape);
+}
+
+const makeCard = () => {
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.style.visibility = "hidden";
+    document.getElementById("main").appendChild(card);
+    card.style.width = "200px";
+    card.style.height = "40vh";
+    GenerateCard(card);
+}
+
+makeCard();
+
+makeCard();
+
+makeCard();
+
+makeCard();
