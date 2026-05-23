@@ -1,0 +1,56 @@
+:root {
+    --max: 40px;
+    --color: #ff0000;
+    --half: var(--max) / 2;
+    --quarter: var(--max) / 4;
+}
+
+.square {
+    width: var(--half);
+    height: var(--half);
+    background-color: var(--color);
+}
+
+.rectangle {
+    width: var(--max);
+    height: var(--half);
+    background-color: var(--color);
+}
+
+.circle {
+    width: var(--half);
+    height: var(--half);
+    background-color: var(--color);
+    border-radius: 50%;
+}
+
+.oval {
+    width: var(--max);
+    height: var(--half);
+    background-color: var(--color);
+    border-radius: 50%;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: var(--half) solid transparent;
+    border-right: var(--half) solid transparent;
+    border-bottom: var(--max) solid var(--color);
+}
+
+.trapezoid {
+    border-bottom: var(--max) solid var(--color);
+    border-left: var(--quarter) solid transparent;
+    border-right: var(--quarter) solid transparent;
+    height: 0;
+    width: var(--max);
+}
+
+.parallelogram {
+    width: (--max);
+    height: var(--half);
+    transform: skew(20deg);
+    background-color: var(--color);
+}
+  
