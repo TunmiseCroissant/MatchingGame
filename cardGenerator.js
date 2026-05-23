@@ -3,14 +3,14 @@ let shapeMaxSize = 40;
 const shapes = ["square", "rectangle", "circle", "oval", "triangle", "trapezoid", "parallelogram"]
 const colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
 
-const GenerateCard = (card) => {
+const GenerateCard = (card, num) => {
     let width = parseInt(window.getComputedStyle(card).width) ;
     let height = parseInt(window.getComputedStyle(card).height) ;
     const placedShapes = [];
     const usedShapes = [];
     const pad = 35;
 
-    for (let i = 0; i < maxShapes; i++) {
+    for (let i = 0; i < num; i++) {
         let newShape;
         let touching = true;
         let tries = 0;
@@ -74,7 +74,7 @@ const makeCard = () => {
     document.getElementById("main").appendChild(card);
     card.style.width = "200px";
     card.style.height = "40vh";
-    GenerateCard(card);
+    GenerateCard(card, 5);
 }
 
 makeCard();
@@ -87,3 +87,15 @@ makeCard();
 makeCard();
 
 makeCard();
+
+const makeBigCard = () => {
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.style.visibility = "hidden";
+    document.getElementById("bigCard").appendChild(card);
+    card.style.width = "35vw";
+    card.style.height = "90vh";
+    GenerateCard(card, 7);
+}
+
+makeBigCard()
