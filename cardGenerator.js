@@ -65,6 +65,14 @@ const placeShape = (card, pos, shapeShape) => {
     shape.style.borderTopColor = color;
     shape.style.borderBottomColor = color;
     card.appendChild(shape);
+    shape.addEventListener("click", (e) => {
+        document.querySelectorAll(".active").forEach(ele => {
+            if (e.target != ele) {
+                ele.classList.remove("active")
+            }
+        })
+        shape.classList.toggle("active")
+    })
 }
 
 const makeCard = () => {
