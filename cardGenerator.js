@@ -2,6 +2,8 @@ let maxShapes = 5;
 let shapeMaxSize = 40;
 const shapes = ["square", "rectangle", "circle", "oval", "triangle", "trapezoid", "parallelogram"]
 const colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
+let bigCard = false;
+let active;
 
 const GenerateCard = (card, num) => {
     let width = parseInt(window.getComputedStyle(card).width) ;
@@ -48,7 +50,7 @@ const GenerateCard = (card, num) => {
     }
 
     card.style.visibility = "visible";
-    console.log(card)
+    // console.log(card)
 }
 
 const placeShape = (card, pos, shapeShape) => {
@@ -66,12 +68,34 @@ const placeShape = (card, pos, shapeShape) => {
     shape.style.borderBottomColor = color;
     card.appendChild(shape);
     shape.addEventListener("click", (e) => {
-        document.querySelectorAll(".active").forEach(ele => {
-            if (e.target != ele) {
-                ele.classList.remove("active")
+        if (!active) {
+            document.querySelectorAll(".active").forEach(ele => {
+                if (e.target != ele) {
+                    ele.classList.remove("active")
+                }
+            })
+            shape.classList.toggle("active")
+            active = shape;
+            console.log(active)
+        } else {
+            if (active.parentElement.parentElement == shape.parentElement.parentElement) {
+                 document.querySelectorAll(".active").forEach(ele => {
+                if (e.target != ele) {
+                    ele.classList.remove("active")
+                }
+            })
+            shape.classList.toggle("active")
+            active = shape;
+            console.log(active)
+            } else {
+                if (active.classList.contains(shapeShape) && active.style.backgroundColor == shape.style.backgroundColor) {
+                        shape.classList.add("active");
+            } else {
+                active.classList.add("wrong")
+                shape.classList.add("wrong")
             }
-        })
-        shape.classList.toggle("active")
+        }
+    }
     })
 }
 
@@ -102,7 +126,7 @@ const makeBigCard = () => {
     card.style.visibility = "hidden";
     document.getElementById("bigCard").appendChild(card);
     card.style.width = "35vw";
-    card.style.height = "90vh";
+    card.style.height = "70vh";
     GenerateCard(card, 7);
 }
 
