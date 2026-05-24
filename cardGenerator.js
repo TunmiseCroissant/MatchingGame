@@ -4,6 +4,7 @@ const shapes = ["square", "rectangle", "circle", "oval", "triangle", "trapezoid"
 const colors = ["red", "orange", "yellow", "green", "blue", "purple", "pink"]
 let bigCard = false;
 let active;
+let Generating = false;
 
 const GenerateCard = (card, num) => {
     let width = parseInt(window.getComputedStyle(card).width) ;
@@ -89,7 +90,16 @@ const placeShape = (card, pos, shapeShape) => {
             console.log(active)
             } else {
                 if (active.classList.contains(shapeShape) && active.style.backgroundColor == shape.style.backgroundColor) {
-                        shape.classList.add("active");
+                        shape.classList.add("right");
+                        active.classList.add("right");
+                        setTimeout(() => {
+                            ReplaceCard()
+                            shape.classList.remove("right");
+                            active.classList.remove("right");
+                            shape.classList.remove("active");
+                            active.classList.remove("active");
+                            active = null;
+                        }, 1000)
             } else {
                 active.classList.add("wrong")
                 shape.classList.add("wrong")
@@ -100,6 +110,7 @@ const placeShape = (card, pos, shapeShape) => {
                     shape.classList.remove("wrong")
                     active.classList.remove("active")
                     shape.classList.remove("active")
+                    active = null;
                 }, 1000);
 
             }
@@ -140,3 +151,30 @@ const makeBigCard = () => {
 }
 
 makeBigCard()
+
+async function ReplaceCard() {
+    if (Generating) return
+
+    Generating = true;
+
+    try {
+       document.getElementById("bigCard").replaceChildren();
+       makeBigCard()
+       await wait(); 
+    } finally {
+        Generating = false;
+    }
+}
+
+const wait = () => {
+    return new Promise((resolve) => {
+        const interval = setInterval(() => {
+            if (document.getElementById("bigCard").hasChildNodes()) {
+                if (document.getElementById("bigCard").querySelector(".card").style.visibility == "visible") {
+                    clearInterval(interval);
+                    resolve(); 
+                }
+            }
+        }, 100);
+    });
+};
